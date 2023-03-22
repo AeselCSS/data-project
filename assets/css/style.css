@@ -65,12 +65,12 @@ img {
 }
 
 a {
-    color: var(--dark-cyan);
+    color: var(--color-secondary);
     text-decoration: none;
 }
 
 a:hover {
-    color: var(--vivid-tangerine);
+    color: var(--color-tertiary);
 }
 
 /* header styling */
@@ -139,7 +139,7 @@ footer {
 footer p {
     color: var(--color-secondary);
     font-size: var(--font-size-small);
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-thin);
     text-align: center;
 }
 
