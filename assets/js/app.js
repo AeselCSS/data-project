@@ -1,5 +1,4 @@
 "use strict";
-window.addEventListener("load", initApp);
 
 // init app
 function initApp() {
@@ -7,7 +6,6 @@ function initApp() {
 }
 
 // ====== DIALOG MODAL FUNCTIONS======
-// showModal function that when called will open the modal and assign event listeners to the modal's close button and the modal's backdrop
 function showModal() {
   const modal = document.querySelector("#modal-container");
   const closeButton = document.querySelector("#close-dialog");
@@ -25,10 +23,10 @@ function showModal() {
   });
 }
 
-// closeModal function that when called will close the modal and remove the event listeners from the modal's close button and the modal's backdrop
 function closeModal() {
   const modal = document.querySelector("#modal-container");
   modal.classList.remove("open");
   modal.classList.add("close");
   modal.close();
 }
+
