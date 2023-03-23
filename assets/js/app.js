@@ -1,5 +1,7 @@
 "use strict";
 
+window.addEventListener("load", initApp);
+
 // init app
 function initApp() {
     console.log("initApp: app started");
