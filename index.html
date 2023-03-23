@@ -1,27 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href=# type="image/x-icon">
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <script src="./assets/js/app.js" defer></script>
     <title>Data project</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Data Project</h1>
+      <h1>Data Project</h1>
     </header>
-    <main>    
-        <section class="grid-container">
-            <!-- grid items goes here -->
-        </section>
+    <main>
+      <section class="grid-container">
+        <!-- grid items goes here -->
+      </section>
+
+      <dialog id="modal-container">
+        <div class="modal-background">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Character details</h2>
+              <button id="close-dialog">X</button>
+            </div>
+            <div class="modal-about">
+              <h3>Character name</h3>
+              <p>character nickname</p>
+              <p>character catch phrase</p>
+              <p>character age</p>
+              <p>character gender</p>
+              <p>character hair color</p>
+            </div>
+            <div class="modal-other-info">
+                <p>character occupation</p>
+                <p>character school grade</p>
+                <p>character religion</p>
+            </div>
+            <div class="modal-appearances">
+                <p>first appearance</p>
+                <p>number of appearances</p>
+                <p>appears in episodes</p>
+                <p>character voiced by</p>
+            </div>
+            <div class="modal-image">
+              <img
+                src="http://southparkstudios.mtvnimages.com/shared/characters/kids/timmy-burch.png"
+                alt="character name image"
+              />
+            </div>
+          </div>
+        </div>
+      </dialog>
     </main>
 
     <footer>
-        <p>Created by: <a href="https://github.com/AeselCSS">Chris Skov Sørensen</a></p>
+      <p>Created by: <a href="https://github.com/AeselCSS">Chris Skov Sørensen</a></p>
     </footer>
-
-</body>
+  </body>
 </html>
