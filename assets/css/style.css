@@ -32,6 +32,7 @@
 /* general styling */
 
 body {
+    position: relative;
     margin: 0;
     padding: 0;
     font-family: var(--font-family-body);
@@ -91,6 +92,7 @@ header h1 {
 /* main styling */
 
 main {
+    position: relative;
     padding: 1em;
 }
 
@@ -205,114 +207,181 @@ footer p {
 
 /* modal styling */
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
+#modal-container {
+  position: fixed;
+  display: table;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  z-index: 1;
+}
+
+#modal-container.open {
+  transform: scaleY(0.01) scaleX(0);
+  animation-name: unfoldIn;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  animation-fill-mode: forwards;
+}
+
+#modal-container.open .modal-background .modal-content {
+  transform: scale(0);
+  animation-name: zoomIn;
+  animation-duration: 0.5s;
+  animation-delay: 0.8s;
+  animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  animation-fill-mode: forwards;
+}
+
+#modal-container.close {
+  transform: scale(1);
+  animation-name: unfoldOut;
+  animation-duration: 1s;
+  animation-delay: 0.3s;
+  animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  animation-fill-mode: forwards;
+}
+
+#modal-container.close .modal-background .modal-content {
+  animation-name: zoomOut;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+  animation-fill-mode: forwards;
+}
+
+.modal-background {
+  background-color: rgba(0,0,0,0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
-    background-color: var(--color-secondary);
-    margin: auto;
-    padding: 20px;
-    border: 1px solid var(--blue-primary);
-    width: 80%;
+  position: absolute;
+  overflow: auto;
+  background-color: #fff;
+  top: 10%;
+    left: 20%;
+    right: 20%;
+    bottom: 10%;
+  padding: 20px;
+  border-radius: 5px;
+  display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+      "modal-header modal-header"
+      "modal-about modal-image"
+      "modal-other-info modal-image"
+      "modal-appearances modal-image";
+  grid-gap: 20px;
 }
 
 .modal-content h2 {
-    color: var(--blue-primary);
-    font-size: var(--font-size-medium);
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 0.5em;
+  color: var(--blue-primary);
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 0.5em;
 }
 
 .modal-content p {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
-.modal-content a {
-    color: var(--blue-primary);
-    text-decoration: none;
+.modal-content .modal-header {
+    grid-area: modal-header;
 }
 
-.modal-content a:hover {
+.modal-content .modal-header h2 {
+    text-align: center;
     color: var(--blue-secondary);
+    text-transform: uppercase;
 }
 
-.modal-close {
+.modal-content .modal-header button {
+    position: absolute;
+    top: 0.25em;
+    right: 0.5em;
+    /* remove default button styling */
+    background: none;
+    border: none;
+    padding: 0;
+    /* custom styles */
+    font-size: 2em;
     color: var(--blue-primary);
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.modal-close:hover, .modal-close:focus {
-    color: var(--blue-secondary);
-    text-decoration: none;
     cursor: pointer;
 }
 
-/* modal media queries */
-
-@media screen and (max-width: 600px) {
-    .modal-content {
-        width: 100%;
-    }
+.modal-content .modal-about {
+    grid-area: modal-about;
 }
 
-/* modal flip up transition animation */
-
-.modal-open {
-    animation-name: modalopen;
-    animation-duration: 0.4s
+.modal-content .modal-other-info {
+    grid-area: modal-other-info;
 }
 
-@keyframes modalopen {
-    from {transform: translateY(100%)}
-    to {transform: translateY(0)}
+.modal-content .modal-appearances {
+    grid-area: modal-appearances;
 }
 
-/* modal flip down transition animation */
-
-.modal-close {
-    animation-name: modalclose;
-    animation-duration: 0.4s
+.modal-content .modal-image {
+    grid-area: modal-image;
 }
 
-@keyframes modalclose {
-    from {transform: translateY(0)}
-    to {transform: translateY(100%)}
-}
-
-/* modal fade in transition animation */
-
-.modal-fade-in {
-    animation-name: modalfadein;
-    animation-duration: 0.4s
-}
-
-@keyframes modalfadein {
-    from {opacity: 0}
-    to {opacity: 1}
-}
-
-/* modal fade out transition animation */
-
-.modal-fade-out {
-    animation-name: modalfadeout;
-    animation-duration: 0.4s
-}
-
-@keyframes modalfadeout {
-    from {opacity: 1}
-    to {opacity: 0}
+.modal-content .modal-image img{
+    height: 75%;
+    object-fit: cover;
 }
 
 
+/* keyframes */
+
+@keyframes unfoldIn {
+  0% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+
+@keyframes unfoldOut {
+  0% {
+    transform: scaleY(1) scaleX(1);
+  }
+  50% {
+    transform: scaleY(0.005) scaleX(1);
+  }
+  100% {
+    transform: scaleY(0.005) scaleX(0);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes zoomOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
