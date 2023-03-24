@@ -5,29 +5,102 @@ window.addEventListener("load", initApp);
 // init app
 async function initApp() {
   console.log("initApp: app started");
+  
+  // get data from json file
   const characterData = await getJsonData("./assets/data/data.json");
   console.log("initApp: data fetched");
-  createHtmlCards(characterData);
-  console.log("initApp: html cards created");
+  
+  // validate data
+    if (!validateData(characterData)) {
+        console.error("initApp: data is not valid");
+        return;
+    }
+    console.log("initApp: data is valid");
+  
+    // create html cards
+    createCharacterCards(characterData);
+  console.log("initApp: character cards created");
 }
 
 // ====== DATA FUNCTIONS ======
 // get json data from url
 async function getJsonData(url) {
+    console.log("getJsonData: fetching data from url");
   const response = await fetch(url);
   return await response.json();
 }
 
+// validate data
+function validateData(data) {
+    console.log("validateData: validating data");
+    // check if data is an array and if it has at least one element
+  if (!Array.isArray(data) || data.length === 0) {
+    console.log("validateData: data is not an array or is empty");
+    return false;
+  }
+
+    // check if all elements in the array are objects
+    for (const element of data) {
+        if (typeof element !== "object") {
+            console.log("validateData: data is not an array of objects");
+            return false;
+        }
+    }
+    // check if all objects have the same keys
+    // get the keys of the first object
+  const keys = Object.keys(data[0]);
+    // loop through the array of objects
+  for (let i = 0; i < data.length; i++) {
+    const object = data[i];
+    // check if the object has the same number of keys as the first object
+    if (Object.keys(object).length !== keys.length) {
+         console.log("validateData: object has different number of keys");
+      return false;
+    }
+    // check if the object has the same keys as the first object
+    for (const key of keys) {
+      if (!object.hasOwnProperty(key)) {
+         console.log("validateData: object has different keys");
+        return false;
+      }
+    }
+  }
+  // check if all fields have either a string, a number, an array, null or undefined value
+  
+  // NOTE: this step of the valisation should ideally be limited to strings and numbers,
+  // and fail if the value is an array, null or undefined.
+  // perhaps data should be prepared before validation.
+  // either way this step should be revised at a later point.
+  
+  // loop through the array of objects
+    for (const object of data) {
+        // loop through the keys of the object
+        for (const key in object) {
+            // get the value of the key
+            const value = object[key];
+            // check if the value is a string, a number, an array, null or undefined
+            if (typeof value !== "string" && typeof value !== "number" && !Array.isArray(value) && value !== null && typeof value !== "undefined") {
+                console.log("validateData: object has invalid value");
+                // return false if the value is not a string, a number, an array, null or undefined
+                return false;
+            }
+        }
+    }
+    // return true if all checks pass
+    console.log("validateData: validation passed");
+  return true;
+}
+
 // ====== DOM MANIPULATION FUNCTIONS ======
 
-// create html cards from array of objects
-function createHtmlCards(characterData) {
-  console.log("creating html cards");
-  console.log(characterData);
+// create character cards from array of objects
+function createCharacterCards(characterData) {
+    console.log("createCharacterCards: creating character cards from below array of objects");
+    console.log(characterData);
   // loop through the data object
   for (const character of characterData) {
     // create the html card
-    const htmlCard = /*html*/ `
+    const characterCard = /*html*/ `
             <article class="grid-item item-card">
                 <h2>${character.name}</h2>
                 <img src="${character.image}" alt="${character.name}">
@@ -37,18 +110,15 @@ function createHtmlCards(characterData) {
             </article>
         `;
     // insert the html card into the grid container
-    document.querySelector(".grid-container").insertAdjacentHTML("beforeend", htmlCard);
+    document.querySelector(".grid-container").insertAdjacentHTML("beforeend", characterCard);
   }
-  // select all the .item-card elements and attach the event listener to each one
+  // attach event listeners to each card
   document.querySelectorAll(".item-card").forEach((card) => {
     card.addEventListener("click", function () {
-      // show modal
-      console.log(this);
-      showModal();
+        showModal();
     });
   });
 }
-
 
 
 // ====== DIALOG MODAL FUNCTIONS ======

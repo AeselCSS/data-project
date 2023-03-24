@@ -101,15 +101,15 @@
       "image": "https://static.wikia.nocookie.net/southpark/images/9/9a/Heather_Swanson.png",
       "occupation": "Athlete",
       "age": "",
-      "voicedby": "Trey Parker",
+      "voicedBy": "Trey Parker",
       "gender": "Female, formerly male",
       "religion": "",
-      "catchprase": "Transphobe!",
-      "haircolor": "Brown",
-      "schoolgrade": "",
+      "catchPhrase": "Transphobe!",
+      "hairColor": "Brown",
+      "schoolGrade": "",
       "episodes": "S23 EP07",
       "appearances": "1",
-      "firstappearance": "Board Girls, S23 EP07"
+      "firstAppearance": "Board Girls, S23 EP07"
     },
     {
       "name": "Eric Cartman",
@@ -176,22 +176,20 @@
       "firstAppearance": "Volcano S01E03"
     },
     {
-      "image": "https://static.wikia.nocookie.net/southpark/images/2/2c/Christina_Aguilera.png/",
       "name": "Christina Aguilera",
-      "age": "42",
-      "gender": "Female",
+      "nickname": "undefined",
+      "image": "https://static.wikia.nocookie.net/southpark/images/2/2c/Christina_Aguilera.png/",
       "occupation": "Singer",
-      "schoolGrade": "None",
-      "religion": "Unknown",
-      "catchphrase": "",
+      "age": "42",
+      "voicedBy": "undefined",
+      "gender": "Female",
+      "religion": "undefined",
+      "catchPhrase": "undefined",
       "hairColor": "Blonde",
+      "schoolGrade": "undefined",
       "episodes": "S4E3",
-      "appearances": "1",
-      "firstAppearance": "S4E3",
-      "race": "Human?",
-      "link": "https://southpark.fandom.com/wiki/Christina_Aguilera",
-      "voicedBy": "None",
-      "number": "1"
+      "appearances": 1,
+      "firstAppearance": "S4E3"
     },
     {
       "name": "Mr. Mackey",
@@ -206,8 +204,8 @@
       "hairColor": "black",
       "schoolGrade": null,
       "episodes": [],
-      "appearences": null,
-      "firstAppearence": "S01E09"
+      "appearances": null,
+      "firstAppearance": "S01E09"
     },
     {
       "name": "Kenneth \"Kenny\" McCormick",
@@ -220,10 +218,9 @@
       "religion": "Roman Catholic , Temporary: Blaintologist*",
       "catchPhrase": "Mrrph rmph rmmph mrrphh!",
       "hairColor": "Blond",
-      "schoolgrade": "4th Grade",
+      "schoolGrade": "4th Grade",
       "episodes": "S01E01 to S22E5",
-      "apperances": "307",
-      "firstApperance": "S01E01"
+      "appearances": "307",
+      "firstAppearance": "S01E01"
     }
-
 ]
