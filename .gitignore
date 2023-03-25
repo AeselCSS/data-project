@@ -328,3 +328,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# project specific files
+/assets/js/temp.js
