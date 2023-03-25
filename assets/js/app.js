@@ -34,7 +34,28 @@ async function getJsonData(url) {
 }
 
 // ====== PREPARE DATA FUNCTIONS ======
-function prepareData(arr) {
+// main function to prepare data
+function prepareData(dataArray) {
+  console.log("prepareData: preparing data");
+  const result = [];
+
+  for (let i = 0; i < dataArray.length; i++) {
+    const characterObject = dataArray[i];
+
+    cleanKeys(characterObject);
+    cleanValues(characterObject);
+
+    result.push(characterObject);
+  }
+  // remove duplicate objects from the result array
+  const uniqueObjects = Array.from(new Set(result.map((characterObject) => JSON.stringify(characterObject))));
+  const preparedCharacterData = uniqueObjects.map((characterObject) => JSON.parse(characterObject));
+  return preparedCharacterData;
+}
+
+// function to clean object keys
+function cleanKeys(characterObject) {
+  console.log("cleanKeys: cleaning keys");
   const allowedKeys = [
     "name",
     "nickname",
@@ -52,79 +73,91 @@ function prepareData(arr) {
     "firstAppearance",
   ];
 
-  const result = [];
-  // loop through the array of objects
-  for (let i = 0; i < arr.length; i++) {
-    // get the object
-    const characterObject = arr[i];
-
-    // remove unwanted keys
-    for (let key in characterObject) {
-      if (!allowedKeys.includes(key)) {
-        delete characterObject[key];
-      }
+  // check if all keys are allowed keys if not move to subsequent loops to clean keys
+  for (const key in characterObject) {
+    if (!allowedKeys.includes(key)) {
+      console.log(`cleanKeys: key: ${key} is not allowed`);
+      break;
     }
+  } 
 
-    // add missing keys with null value
-    for (let j = 0; j < allowedKeys.length; j++) {
-      const key = allowedKeys[j];
-      if (!characterObject.hasOwnProperty(key)) {
-        characterObject[key] = null;
-      }
+  // remove spaces, underscores and numbers from keys
+  for (const key in characterObject) {
+    if (/\s|_|[0-9]/.test(key)) {
+      const newKey = key.replace(/\s|_|[0-9]/g, "");
+      characterObject[newKey] = characterObject[key];
+      delete characterObject[key];
     }
-
-    // format string values
-    for (let key in characterObject) {
-      if (key !== "image" && typeof characterObject[key] === "string") {
-        characterObject[key] = characterObject[key].toLowerCase().replace(/\s+/g, " ").trim();
-      } else if (key === "image" && typeof characterObject[key] === "string") {
-        characterObject[key] = characterObject[key].trim();
-      }
+  }
+  // convert mispelled keys to allowed keys
+  for (const key in characterObject) {
+    const lowercaseKey = key.toLowerCase();
+    const matchingKey = allowedKeys.find((allowedKey) => allowedKey.toLowerCase() === lowercaseKey);
+    if (matchingKey && key !== matchingKey) {
+      characterObject[matchingKey] = characterObject[key];
+      delete characterObject[key];
     }
-
-    // format number values
-    const numericKeys = ["age", "schoolGrade", "appearances"];
-    for (let j = 0; j < numericKeys.length; j++) {
-      const key = numericKeys[j];
-      if (typeof characterObject[key] === "string") {
-        const numericPart = characterObject[key].match(/\d+/);
-        characterObject[key] = numericPart ? parseInt(numericPart[0]) : null;
-      }
+  }
+  // remove unwanted keys
+  for (let key in characterObject) {
+    if (!allowedKeys.includes(key)) {
+      delete characterObject[key];
     }
-
-    // replace undefined, empty string and string that are === to "undefined" or "null" values with null
-    for (let key in characterObject) {
-      if (
-        characterObject[key] === undefined ||
-        characterObject[key] === "" ||
-        characterObject[key] === "undefined" ||
-        characterObject[key] === "null"
-      ) {
-        characterObject[key] = null;
-      }
+  }
+  // add missing keys with null value
+  for (const key of allowedKeys) {
+    if (!characterObject.hasOwnProperty(key)) {
+      characterObject[key] = null;
     }
+  }
+}
 
-    result.push(characterObject);
+// function to clean object values
+function cleanValues(characterObject) {
+  console.log("cleanValues: cleaning values");
+  // convert all values besides the value of the key "image" to lowercase, trim and remove extra spaces
+  for (let key in characterObject) {
+    if (key !== "image" && typeof characterObject[key] === "string") {
+      characterObject[key] = characterObject[key].toLowerCase().replace(/\s+/g, " ").trim();
+    } else if (key === "image" && typeof characterObject[key] === "string") {
+      characterObject[key] = characterObject[key].trim();
+    }
+  }
+  // convert string values to numbers for the keys "age", "schoolGrade" and "appearances"
+  const numericKeys = ["age", "schoolGrade", "appearances"];
+  for (let key in characterObject) {
+    // check if the key is a numeric key and if the value is a string that contains a number
+    // (e.g. "age": "12 years old") and convert it to a number
+    if (numericKeys.includes(key) && typeof characterObject[key] === "string") {
+      const numericPart = characterObject[key].match(/\d+/);
+      
+      characterObject[key] = numericPart ? parseInt(numericPart[0]) : null;
+    }
   }
 
-  // remove duplicate objects
-  const uniqueObjects = Array.from(new Set(result.map((obj) => JSON.stringify(obj))));
-  const uniqueParsedObjects = uniqueObjects.map((obj) => JSON.parse(obj));
-  const preparedCharacterData = uniqueParsedObjects;
-  return preparedCharacterData;
+  for (let key in characterObject) {
+    if (
+      characterObject[key] === undefined ||
+      characterObject[key] === "" ||
+      characterObject[key] === "undefined" ||
+      characterObject[key] === "null"
+    ) {
+      characterObject[key] = null;
+    }
+  }
 }
 
 // ====== DATA VALIDATION ======
-function validateData(data) {
+function validateData(dataArray) {
   console.log("validateData: validating data");
   // check if data is an array and if it has at least one element
-  if (!Array.isArray(data) || data.length === 0) {
+  if (!Array.isArray(dataArray) || dataArray.length === 0) {
     console.log("validateData: data is not an array or is empty");
     return false;
   }
 
   // check if all elements in the array are objects
-  for (const element of data) {
+  for (const element of dataArray) {
     if (typeof element !== "object") {
       console.log("validateData: data is not an array of objects");
       return false;
@@ -132,10 +165,10 @@ function validateData(data) {
   }
   // check if all objects have the same keys
   // get the keys of the first object
-  const keys = Object.keys(data[0]);
+  const keys = Object.keys(dataArray[0]);
   // loop through the array of objects
-  for (let i = 0; i < data.length; i++) {
-    const object = data[i];
+  for (let i = 0; i < dataArray.length; i++) {
+    const object = dataArray[i];
     // check if the object has the same number of keys as the first object
     if (Object.keys(object).length !== keys.length) {
       console.log("validateData: object has different number of keys");
@@ -157,7 +190,7 @@ function validateData(data) {
   // either way this step should be revised at a later point.
 
   // loop through the array of objects
-  for (const object of data) {
+  for (const object of dataArray) {
     // loop through the keys of the object
     for (const key in object) {
       // get the value of the key
