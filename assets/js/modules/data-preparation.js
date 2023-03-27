@@ -1,29 +1,39 @@
-export function prepareData(dataArray) {
+import { checkAndModifyImageValue } from "./data-modify-image-value.js";
+
+export function prepareData(characterObject) {
   console.log("prepareData: preparing data");
-  const result = [];
-
-  for (let i = 0; i < dataArray.length; i++) {
-    const characterObject = dataArray[i];
-
-    cleanKeys(characterObject);
-    cleanValues(characterObject);
-
-    result.push(characterObject);
-  }
-
-  const preparedCharacterData = removeDuplicateObjects(result);
-  return preparedCharacterData;
+  const checkedObject = checkObject(characterObject);
+  const cleanedImage = checkAndModifyImageValue(checkedObject);
+  const cleanedKeys = cleanKeys(cleanedImage);
+  const preparedObject = cleanValues(cleanedKeys);
+  console.log("prepareData: data prepared");
+  return preparedObject;
 }
 
-// Function to remove duplicate objects from an array
-function removeDuplicateObjects(array) {
-  const uniqueObjects = Array.from(new Set(array.map((object) => JSON.stringify(object))));
-  return uniqueObjects.map((object) => JSON.parse(object));
+// function to perform initial check upon objects
+function checkObject(characterObject) {
+  console.log("checkObject: checking object");
+    // if character object is not an not an object or an array, skip to next iteration
+    if (typeof characterObject !== "object" || Array.isArray(characterObject)) {
+      return;
+    }
+    // if character object is an empty object, skip to next iteration
+    if (Object.keys(characterObject).length === 0) {
+      return;
+    }
+    // if character object is an array of objects, pull out the objects and add them to characterObject
+    if (Array.isArray(characterObject) && typeof characterObject[0] === "object") {
+      characterObject = characterObject[0];
+    }
+    console.log("checkObject: object checked");
+    return characterObject;
 }
+
 
 // function to clean object keys
 function cleanKeys(characterObject) {
   console.log("cleanKeys: cleaning keys");
+  // define allowed keys
   const allowedKeys = [
     "name",
     "nickname",
@@ -54,6 +64,7 @@ function cleanKeys(characterObject) {
     if (/\s|_|[0-9]/.test(key)) {
       const newKey = key.replace(/\s|_|[0-9]/g, "");
       characterObject[newKey] = characterObject[key];
+      console.log(`cleanKeys: key: ${key} has been changed to ${newKey}`);
       delete characterObject[key];
     }
   }
@@ -63,21 +74,26 @@ function cleanKeys(characterObject) {
     const matchingKey = allowedKeys.find((allowedKey) => allowedKey.toLowerCase() === lowercaseKey);
     if (matchingKey && key !== matchingKey) {
       characterObject[matchingKey] = characterObject[key];
+      console.log(`cleanKeys: key: ${key} has been changed to ${matchingKey}`);
       delete characterObject[key];
     }
   }
   // remove unwanted keys
   for (let key in characterObject) {
     if (!allowedKeys.includes(key)) {
+      console.log(`cleanKeys: key: ${key} is not allowed and will be removed`);
       delete characterObject[key];
     }
   }
   // add missing keys with null value
   for (const key of allowedKeys) {
     if (!characterObject.hasOwnProperty(key)) {
+      console.log(`cleanKeys: key: ${key} is missing and will be added with null value`);
       characterObject[key] = null;
     }
   }
+  console.log("cleanKeys: keys cleaned");
+  return characterObject;
 }
 
 // function to clean object values
@@ -91,6 +107,7 @@ function cleanValues(characterObject) {
       characterObject[key] = characterObject[key].trim();
     }
   }
+
   // convert string values to numbers for the keys "age", "schoolGrade" and "appearances"
   const numericKeys = ["age", "schoolGrade", "appearances"];
   for (let key in characterObject) {
@@ -129,4 +146,7 @@ function cleanValues(characterObject) {
       characterObject[key] = null;
     }
   }
+  console.log("cleanValues: values cleaned");
+  return characterObject;
 }
+
