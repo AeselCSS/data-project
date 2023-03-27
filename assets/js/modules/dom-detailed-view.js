@@ -1,7 +1,7 @@
 import { showModal } from "./dom-modal.js";
 
 export function showDetails(character) {
-  console.log(`showDetails: showing details for: ${character.name}`);
+  // console.log(`showDetails: showing details for: ${character.name}`);
   // populate the modal-content with the data from the object
   document.querySelector("#character-name").textContent = character.name;
   document.querySelector("#character-nickname").textContent = character.nickname;

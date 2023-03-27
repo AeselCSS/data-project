@@ -1,7 +1,7 @@
 import { showDetails } from "./dom-detailed-view.js";
 
 export function createCharacterCards(character) {
-  console.log(`createCharacterCards: creating character card for: ${character.name}`);
+  // console.log(`createCharacterCards: creating character card for: ${character.name}`);
 
   // create the html card
   const characterCard = /*html*/ `

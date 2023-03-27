@@ -1,10 +1,8 @@
 "use strict";
 
 // import modules
-import { getJsonData } from "./assets/js/modules/data-getJsonData.js";
 import { prepareData } from "./assets/js/modules/data-preparation.js";
 import { validateData } from "./assets/js/modules/data-validation.js";
-import { removeDuplicateObjects } from "./assets/js/modules/data-remove-duplicates.js";
 import { createCharacterCards } from "./assets/js/modules/dom-character-cards.js";
 
 window.addEventListener("load", initApp);
@@ -47,4 +45,15 @@ async function initApp() {
     uniqueObjectsArray.forEach(createCharacterCards);
     console.log("initApp: character cards created");
   }
+}
+
+async function getJsonData(url) {
+  // console.log("getJsonData: fetching data from url");
+  const response = await fetch(url);
+  return await response.json();
+}
+
+function removeDuplicateObjects(array) {
+  const uniqueObjects = Array.from(new Set(array.map((object) => JSON.stringify(object))));
+  return uniqueObjects.map((object) => JSON.parse(object));
 }

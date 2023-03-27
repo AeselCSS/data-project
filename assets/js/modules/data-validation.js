@@ -1,5 +1,5 @@
 export function validateData(dataArray) {
-  console.log("validateData: validating data");
+  // console.log("validateData: validating data");
 
   if (!isArrayNotEmpty(dataArray)) {
     console.log("validateData: data is not an array or is empty");

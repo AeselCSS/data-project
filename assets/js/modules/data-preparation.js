@@ -1,18 +1,18 @@
 import { checkAndModifyImageValue } from "./data-modify-image-value.js";
 
 export function prepareData(characterObject) {
-  console.log("prepareData: preparing data");
+  // console.log("prepareData: preparing data");
   const checkedObject = checkObject(characterObject);
   const cleanedImage = checkAndModifyImageValue(checkedObject);
   const cleanedKeys = cleanKeys(cleanedImage);
   const preparedObject = cleanValues(cleanedKeys);
-  console.log("prepareData: data prepared");
+  // console.log("prepareData: data prepared");
   return preparedObject;
 }
 
 // function to perform initial check upon objects
 function checkObject(characterObject) {
-  console.log("checkObject: checking object");
+  // console.log("checkObject: checking object");
     // if character object is not an not an object or an array, skip to next iteration
     if (typeof characterObject !== "object" || Array.isArray(characterObject)) {
       return;
@@ -25,14 +25,14 @@ function checkObject(characterObject) {
     if (Array.isArray(characterObject) && typeof characterObject[0] === "object") {
       characterObject = characterObject[0];
     }
-    console.log("checkObject: object checked");
+    // console.log("checkObject: object checked");
     return characterObject;
 }
 
 
 // function to clean object keys
 function cleanKeys(characterObject) {
-  console.log("cleanKeys: cleaning keys");
+  // console.log("cleanKeys: cleaning keys");
   // define allowed keys
   const allowedKeys = [
     "name",
@@ -92,13 +92,13 @@ function cleanKeys(characterObject) {
       characterObject[key] = null;
     }
   }
-  console.log("cleanKeys: keys cleaned");
+  // console.log("cleanKeys: keys cleaned");
   return characterObject;
 }
 
 // function to clean object values
 function cleanValues(characterObject) {
-  console.log("cleanValues: cleaning values");
+  // console.log("cleanValues: cleaning values");
   // convert all values besides the value of the key "image" to lowercase, trim and remove extra spaces
   for (let key in characterObject) {
     if (key !== "image" && typeof characterObject[key] === "string") {
@@ -146,7 +146,7 @@ function cleanValues(characterObject) {
       characterObject[key] = null;
     }
   }
-  console.log("cleanValues: values cleaned");
+  // console.log("cleanValues: values cleaned");
   return characterObject;
 }
 
