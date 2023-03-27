@@ -25,29 +25,26 @@
               <button id="close-dialog">X</button>
             </div>
             <div class="modal-about">
-              <h3>Character name</h3>
-              <p>character nickname</p>
-              <p>character catch phrase</p>
-              <p>character age</p>
-              <p>character gender</p>
-              <p>character hair color</p>
+              <h3 id="character-name"></h3>
+              <p>Nickname: <span id="character-nickname"></span></p>
+              <p>Age: <span id="character-age"></span></p>
+              <p>Gender: <span id="character-gender"></span></p>
+              <p>Haircolor: <span id="character-haircolor"></span></p>
             </div>
             <div class="modal-other-info">
-                <p>character occupation</p>
-                <p>character school grade</p>
-                <p>character religion</p>
+              <p>Catchphrase: <span id="character-catchphrase"></span></p>
+              <p>Occupation: <span id="character-occupation"></Occupation:></p>
+              <p>Schoolgrade: <span id="character-schoolgrade"></span></p>
+              <p>Religion: <span id="character-religion"></span></p>
             </div>
             <div class="modal-appearances">
-                <p>first appearance</p>
-                <p>number of appearances</p>
-                <p>appears in episodes</p>
-                <p>character voiced by</p>
+              <p>First appearance: <span id="character-firstappearance"></span></p>
+              <p>Number of appearances: <span id="character-appearances"></span></p>
+              <p>Appear in episodes: <span id="character-episodes"></span></p>
+              <p>Voiced by: <span id="character-voicedby"></span></p>
             </div>
             <div class="modal-image">
-              <img
-                src="http://southparkstudios.mtvnimages.com/shared/characters/kids/timmy-burch.png"
-                alt="character name image"
-              />
+              <img id="character-image" />
             </div>
           </div>
         </div>
@@ -58,12 +55,15 @@
       <p>Created by: <a href="https://github.com/AeselCSS">Chris Skov Sørensen</a></p>
     </footer>
     <!-- script modules -->
-    <script type="module" src="./assets/js/data-getJsonData-module.js"></script>
-    <script type="module" src="./assets/js/data-preparation-module.js"></script>
-    <script type="module" src="./assets/js/data-validation-module.js"></script>
-    <script type="module" src="./assets/js/dom-character-cards-module.js"></script>
-    <script type="module" src="./assets/js/dom-detailed-view-module.js"></script>
+    <script type="module" src="./assets/js/modules/data-getJsonData.js"></script>
+    <script type="module" src="./assets/js/modules/data-preparation.js"></script>
+    <script type="module" src="./assets/js/modules/data-modify-image-value.js"></script>
+    <script type="module" src="./assets/js/modules/data-validation.js"></script>
+    <script type="module" src="./assets/js/modules/data-remove-duplicates.js"></script>
+    <script type="module" src="./assets/js/modules/dom-character-cards.js"></script>
+    <script type="module" src="./assets/js/modules/dom-detailed-view.js"></script>
+    <script type="module" src="./assets/js/modules/dom-modal.js"></script>
     <!-- main script -->
-    <script type="module" src="./assets/js/app.js"></script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>
