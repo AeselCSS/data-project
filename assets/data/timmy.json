@@ -6,7 +6,7 @@
   "age": 10,
   "voicedBy": "Trey Parker",
   "gender": "male",
-  "religion": "undefined",
+  "religion": null,
   "catchPhrase": "TIMMEH!",
   "hairColor": "Strawberry Blond",
   "schoolGrade": 4,

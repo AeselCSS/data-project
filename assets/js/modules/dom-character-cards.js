@@ -1,4 +1,5 @@
 import { showDetails } from "./dom-detailed-view.js";
+import * as domHelpers from "./dom-helpers.js";
 
 export function createCharacterCards(character) {
   // console.log(`createCharacterCards: creating character card for: ${character.name}`);
@@ -6,10 +7,10 @@ export function createCharacterCards(character) {
   // create the html card
   const characterCard = /*html*/ `
             <article class="grid-item item-card">
-                <h2>${character.name}</h2>
+                <h2>${domHelpers.capitalizeAll(character.name)}</h2>
                 <img src="${character.image}" alt="image of ${character.name}">
-                <p>${character.age} years old</p>
-                <p>${character.occupation}</p>
+                <p>${character.age} Years Old</p>
+                <p>${domHelpers.capitalizeAll(character.occupation)}</p>
             </article>
         `;
   // insert the html card into the grid container
