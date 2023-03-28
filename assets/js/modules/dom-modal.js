@@ -26,4 +26,10 @@ function closeModal() {
   modal.classList.remove("open");
   modal.classList.add("close");
   modal.close();
+  clearAdjacentHTML();
+}
+
+function clearAdjacentHTML() {
+  const container = document.querySelector("#character-episodes");
+  container.innerHTML = "";
 }

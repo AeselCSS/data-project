@@ -42,7 +42,10 @@ async function initApp() {
 
   // if data is valid, create character cards
   if (isDataValid) {
-    uniqueObjectsArray.forEach(createCharacterCards);
+    // uniqueObjectsArray.forEach(createCharacterCards);
+    for (const character of uniqueObjectsArray) {
+      createCharacterCards(character)
+    }
     console.log("initApp: character cards created");
   }
 }

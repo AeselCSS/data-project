@@ -1,5 +1,6 @@
-export function checkAndModifyImageValue(characterObject) {
+export function cleanImages(characterObject) {
   //   console.log("checkAndModifyImageValue: checking if image value has more than one image file extension");
+  
   // Check if characterObject has an "image" property
   const hasImageProperty = characterObject.hasOwnProperty("image");
 
@@ -25,7 +26,7 @@ function checkAndModifyExtension(characterObject) {
   const lastDotIndex = imageValue.lastIndexOf(".");
   const extension = imageValue.substring(lastDotIndex + 1);
   const extensionIndex = imageValue.lastIndexOf("." + extension);
-  
+
   if (
     extension.includes("jpeg") ||
     extension.includes("jpg") ||
