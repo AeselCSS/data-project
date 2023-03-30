@@ -2,6 +2,7 @@ import { cleanImages } from "./data-clean-images.js";
 import { cleanKeys } from "./data-clean-keys.js";
 import { cleanValues } from "./data-clean-values.js";
 
+// Main function to prepare data
 export function prepareData(characterObject) {
   // console.log("prepareData: preparing data");
   const checkedObject = checkObject(characterObject);

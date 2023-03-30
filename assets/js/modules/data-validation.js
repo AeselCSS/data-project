@@ -16,7 +16,7 @@ export function validateData(dataArray) {
     return false;
   }
 
-  if (!hasValidFields(dataArray)) {
+  if (!hasValidValues(dataArray)) {
     console.log("validateData: object has invalid value");
     return false;
   }
@@ -61,7 +61,7 @@ function hasSameKeys(dataArray) {
 }
 
 // check if all fields have either a string, a number or null value
-function hasValidFields(dataArray) {
+function hasValidValues(dataArray) {
   for (const characterObject of dataArray) {
     // loop through the keys of the object
     for (const key in characterObject) {

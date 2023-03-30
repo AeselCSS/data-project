@@ -14,6 +14,7 @@ export function cleanImages(characterObject) {
   // check if image value starts with either http:// or https:// and if not replace it with null
   if (characterObject.image) {
     if (!characterObject.image.startsWith("http://") && !characterObject.image.startsWith("https://")) {
+      console.log(`checkAndModifyImageValue: image value: ${characterObject.image} does not start with http:// or https://`);
       characterObject.image = null;
     }
   }
@@ -37,7 +38,7 @@ function checkAndModifyExtension(characterObject) {
   ) {
     characterObject.image = imageValue.substring(0, extensionIndex + 5);
   } else {
-    console.log("image file extension is not supported");
+    console.log(`${characterObject.image} does not have a valid image file extension`);
   }
   return characterObject.image;
 }

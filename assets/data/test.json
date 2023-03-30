@@ -64,5 +64,21 @@
     "link": "https://southpark.fandom.com/wiki/Christina_Aguilera",
     "voicedBy": "None",
     "number": "1"
+  },
+  {
+    "name": "Kyle Schwartz",
+    "nickname": "Human Kite 2",
+    "image": "https://i.imgur.com/cIQJWk0.png",
+    "occupation": "student",
+    "age": 9,
+    "voicedBy": "Trey Parker",
+    "gender": "male",
+    "religion": "Judaism",
+    "catchPhrase": null,
+    "hairColor": "brown",
+    "schoolGrade": 4,
+    "episodes": "s05e11, s06e17, s09e05",
+    "appearances": 3,
+    "firstAppearance": "s05e11"
   }
 ]

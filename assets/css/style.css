@@ -8,7 +8,7 @@
     --font-family-body: 'Lato', sans-serif;
     --font-family-code: 'Roboto Mono', monospace;
     --font-size: 1em;
-    --font-size-small: 1.2em;
+    --font-size-small: 1.1em;
     --font-size-medium: 1.35em;
     --font-size-large: 1.5em;
     --font-size-xlarge: 2.75em;
@@ -41,6 +41,7 @@ body {
     line-height: var(--line-height);
     color: var(--color-primary);
     background-color: var(--color-secondary);
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -61,31 +62,26 @@ h3 {
     font-size: var(--font-size-small);
 }
 
-img {
-    max-width: 100%;
-}
-
 a {
     color: var(--color-secondary);
     text-decoration: none;
 }
 
-a:hover {
-    color: var(--color-tertiary);
-}
-
 /* header styling */
 
 header {
+  min-height: 100px;
     background-color: var(--blue-secondary);
-    /* background-image: url('../images/header.svg'); */
+    background-image: url('../images/header.svg');
+    /* background-size: cover; */
     padding: 1em;
 }
 
 header h1 {
     color: var(--color-secondary);
+    text-shadow: 2px 1px 1px var(--color-primary);
     font-size: var(--font-size-xlarge);
-    font-weight: var(--font-weight-thin);
+    font-weight: var(--font-weight-light);
     text-align: center;
     margin: 0.3em;
 }
@@ -93,19 +89,20 @@ header h1 {
 /* main styling */
 
 main {
+  background-color: var(--blue-secondary);
     position: relative;
     padding: 1em;
 }
 
 main h2 {
-    color: var(--blue-primary);
+    color: var(--blue-secondary);
     font-size: var(--font-size-medium);
     font-weight: var(--font-weight-bold);
     margin-bottom: 0.5em;
 }
 
 main h3 {
-    color: var(--blue-primary);
+    color: var(--blue-secondary);
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-bold);
     margin-bottom: 0.5em;
@@ -135,7 +132,9 @@ main a:hover {
 /* footer styling */
 
 footer {
+    max-height: 100px;
     background-color: var(--blue-secondary);
+    background-image: url('../images/footer.svg');
     padding: 1em;
 }
 
@@ -144,6 +143,7 @@ footer p {
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-thin);
     text-align: center;
+    padding-top: 2em;
 }
 
 /* grid styling */
@@ -155,40 +155,27 @@ footer p {
 }
 
 .grid-item {
-    background-color: var(--blue-quaternary);
-    border: 1px solid var(--blue-secondary);
-    box-shadow: 0 0 10px var(--blue-secondary);
+    background-color: var(--peach-orange);
+    border: 1px solid var(--vivid-tangerine);
+    border-radius: 25px;
+    box-shadow: 0 0 5px var(--vivid-tangerine);
     padding: 1em;
     text-align: center;
 }
 
 .grid-item:hover {
-    box-shadow: 0 0 10px var(--dark-cyan);
-}
-
-.grid-item h2 {
-    color: var(--blue-primary);
-    font-size: var(--font-size-medium);
-    font-weight: var(--font-weight-bold);
-    margin-bottom: 0.5em;
+  border: 1px solid var(--blue-tertiary);
+    box-shadow: 0 0 10px var(--blue-tertiary);
 }
 
 .grid-item p {
-    margin-bottom: 1em;
-}
-
-.grid-item a {
-    color: var(--blue-primary);
-    text-decoration: none;
-}
-
-.grid-item a:hover {
-    color: var(--blue-secondary);
+    margin-bottom: .5em;
+    font-size: var(--font-size);
 }
 
 .grid-item img {
     width: auto;
-    height: 12em;
+    height: 10em;
     object-fit: cover;
 
 }
@@ -267,7 +254,8 @@ footer p {
 }
 
 .modal-background {
-  background-color: rgba(0,0,0,0.7);
+  background-color: var(--blue-secondary);
+  background-image: url('../images/modal-bg-waves.svg');
   position: fixed;
   top: 0;
   left: 0;
@@ -279,25 +267,22 @@ footer p {
 }
 
 .modal-content {
-  position: absolute;
   overflow: auto;
-  background-color: var(--blue-quaternary);
+  background-color: #dedede8c;
+  border: #39507D 1px solid;
+  border-radius: 15px;
+  position: absolute;
   top: 10%;
   left: 20%;
   height: 80%;
   width: 60%;
   padding: 20px;
-  border-radius: 15px;
-  display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-areas:
-      "modal-header modal-header"
-      "modal-about modal-image"
-      "modal-other-info modal-image"
-      "modal-appearances modal-appearances";
-  grid-gap: 0.25em;
 }
+
+.modal-content:nth-child(4) {
+  width: 30%;
+}
+
 
 .modal-content h3 {
   color: var(--blue-secondary);
@@ -319,6 +304,7 @@ footer p {
   margin: 0.25em 0;
   font-size: 0.8em;
   list-style-type: circle;
+  max-width: 65%;
 }
 
 .modal-content table {
@@ -347,10 +333,6 @@ footer p {
 
 .modal-content thead th:nth-child(2) {
   width: 70%;
-}
-
-.modal-content .modal-header {
-    grid-area: modal-header;
 }
 
 .modal-content .modal-header h1 {
@@ -382,20 +364,8 @@ footer p {
     color: var(--blue-primary);
 }
 
-.modal-content .modal-about {
-    grid-area: modal-about;
-}
-
-.modal-content .modal-other-info {
-    grid-area: modal-other-info;
-}
-
-.modal-content .modal-appearances {
-    grid-area: modal-appearances;
-}
-
-.modal-content .modal-image {
-    grid-area: modal-image;
+.modal-content .modal-header button:focus {
+    outline: none;
 }
 
 .modal-content .modal-image img{
@@ -409,7 +379,6 @@ footer p {
     border: 1px solid var(--blue-primary);
     background-color: var(--color-secondary);
 }
-
 
 /* keyframes */
 
