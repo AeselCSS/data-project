@@ -9,8 +9,12 @@ export function createCharacterCards(character) {
             <article class="grid-item item-card">
                 <h2>${domHelpers.capitalizeAll(character.name)}</h2>
                 <img src="${character.image}" alt="image of ${character.name}">
-                <p>${character.age} Years Old</p>
-                <p>${domHelpers.capitalizeAll(character.occupation)}</p>
+                <p>${domHelpers.formatAge(character.age, character.gender, character.name)}</p>
+                <p>${domHelpers.formatOccupation(
+                  domHelpers.capitalizeAll(character.occupation),
+                  character.gender,
+                  character.name
+                )}</p>
             </article>
         `;
   // insert the html card into the grid container

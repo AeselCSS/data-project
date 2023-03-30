@@ -76,7 +76,7 @@ function removeUnwantedKeys(characterObject) {
 function addMissingKeys(characterObject) {
   for (const key of allowedKeys) {
     if (!characterObject.hasOwnProperty(key)) {
-      console.log(`cleanKeys: key: ${key} is missing and will be added with null value`);
+      console.log(`cleanKeys: key: ${key} is missing and will be added with null value on the character: ${characterObject.name}`);
       characterObject[key] = null;
     }
   }

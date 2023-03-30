@@ -13,10 +13,30 @@ async function initApp() {
 
   // get data from url
   const url = "https://cederdorff.github.io/dat-js/05-data/southpark.json";
-  const testUrl = "./assets/data/test.json";
+  const testUrl = "./assets/data/data.json";
   const characterData = await getJsonData(url);
   console.log("initApp: data fetched");
 
+  // prepare data
+  const preparedDataArray = prepareDataArray(characterData);
+
+  // remove duplicate objects from array
+  const uniqueObjectsArray = removeDuplicateObjects(preparedDataArray);
+  console.log("initApp: duplicate objects removed");
+
+  // validate the array of character objects
+  const isDataValid = validateData(uniqueObjectsArray);
+
+  // if data is valid, create character cards
+  if (isDataValid) {
+    for (const character of uniqueObjectsArray) {
+      createCharacterCards(character);
+    }
+    console.log("initApp: character cards created");
+  }
+}
+
+function prepareDataArray(characterData) {
   const preparedDataArray = [];
   // loop through data
   characterData.forEach(function (character) {
@@ -27,27 +47,7 @@ async function initApp() {
 
     return preparedData;
   });
-
-  // remove duplicate objects from array
-  const uniqueObjectsArray = removeDuplicateObjects(preparedDataArray);
-  console.log("initApp: duplicate objects removed");
-
-  // validate the array of character objects
-  const isDataValid = validateData(uniqueObjectsArray);
-  if (isDataValid) {
-    console.log("initApp: data validated");
-  } else {
-    console.log("initApp: ERROR: data is invalid");
-  }
-
-  // if data is valid, create character cards
-  if (isDataValid) {
-    // uniqueObjectsArray.forEach(createCharacterCards);
-    for (const character of uniqueObjectsArray) {
-      createCharacterCards(character)
-    }
-    console.log("initApp: character cards created");
-  }
+  return preparedDataArray;
 }
 
 async function getJsonData(url) {
