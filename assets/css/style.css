@@ -280,7 +280,7 @@ footer p {
   margin: 0.25em 0;
   font-size: 0.8em;
   list-style-type: circle;
-  max-width: 65%;
+  max-width: 62.5%;
 }
 
 .modal-content table {
@@ -354,6 +354,15 @@ footer p {
   border-radius: 50%;
   border: 1px solid var(--blue-primary);
   background-color: var(--color-secondary);
+}
+
+/* modal themes */
+dialog[data-theme="male"] .modal-background {
+  background-image: url("../images/modal-bg-waves.svg");
+}
+
+dialog[data-theme="female"] .modal-background {
+  background-image: url("../images/modal-bg-waves-pink.svg");
 }
 
 /* keyframes */

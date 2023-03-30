@@ -13,7 +13,6 @@ async function initApp() {
 
   // get data from url
   const url = "https://cederdorff.github.io/dat-js/05-data/southpark.json";
-  const testUrl = "./assets/data/data.json";
   const characterData = await getJsonData(url);
   console.log("initApp: data fetched");
 

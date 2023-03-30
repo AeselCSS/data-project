@@ -53,6 +53,10 @@ export function showDetails(character) {
     domHelpers.capitalizeAll(character.name)
   );
   domHelpers.formatEpisodes(character.episodes);
+
+  // apply theme to the modal
+  document.querySelector("dialog").setAttribute("data-theme", character.gender);
+
   // open the modal
   showModal(); // from dom-modal-module.js
 }
